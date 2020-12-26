@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+
+    <% if user_signed_in? %>
+      <li>
+        <a href= "/">Bookers</a>
+        </li>
+        <li>
+        <%= link_to user_path(current_user.id) do %>
+        <i class="fas fa-home"></i>Home
+        <% end %>
+        </li>
+        <li>
+           <%= link_to  user_registration_path do %>
+         <i class="fas fa-users"></i>Users
+         <% end %>
+         </li>
+         <li>
+           <%= link_to  books_path do %>
+         <i class="fas fa-book-open"></i>Books
+         <% end %>
+         </li>
+         <li>
+        <%= link_to destroy_user_session_path, method: :delete do %>
+        <i class="fas fa-sign-out-alt"></i>logout
+        <% end %>
+        </li>
+      </li>
+    <% else %>
+      <li>
+        <a href= "/">Bookers</a>
+        </li>
+        <h3 class="header-botton">
+
+        <li>
+          <%= link_to root_path do %>
+          <i class="fas fa-home"></i>Home
+          <% end %>
+        </li>
+        <li>
+           <%= link_to home_about_path do %>
+        <i class="fas fa-link"></i>About
+        <% end %>
+        </li>
+        <li>
+          <%= link_to new_user_registration_path do %>
+        <i class="fas fa-user-plus"></i>sign up
+        <% end %>
+        </li>
+        <li>
+        <%= link_to new_user_session_path do %>
+       <i class="fas fa-sign-in-alt"></i>Login
+       <% end %>
+      </li>
+    <% end %>
+    <%= flash[:notice] %>
+    <%= yield %>
+    </header>
+  </body>
+</html>

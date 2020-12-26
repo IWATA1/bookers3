@@ -1,0 +1,44 @@
+<div class="container px-5 px-sm-0">
+    <div class="row">
+    <div class="col-md-3">
+<%= render 'books/list', user: @user, book: @book %>
+</div>
+ <main>
+   <div class="col-md-8 offset-md-1">
+ <section class="book">
+   <h4>Books</h4>
+   <table >
+    <thewd>
+     <tr>
+      <th></th>
+   <th>Title</th>
+    <th>Opinion</th>
+    <th></th>
+    <th></th>
+    </tr>
+    </thewd>
+   <div class="book-box"></div>
+     <% @books.each do |book| %>
+      <tr>
+      <div class="book-item">
+        <section class="book-text">
+         <th>
+          <%= link_to user_path do %>
+          <span><%= attachment_image_tag book.user, :profile_image, fallback:"no_image.jpg" %></span>
+          <% end %>
+          </th>
+         <th>
+          <h3 class="book-title"><%= link_to book.title,book_path(book.id) %></h3>
+          </th>
+          <th>
+          <p class="book-opinion"><%= book.body %></p>
+          </th>
+        </section>
+      </div>
+     <% end %>
+     </table>
+  </section>
+
+</main>
+</div>
+</div>
