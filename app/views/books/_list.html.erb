@@ -1,13 +1,30 @@
-<h1>User info</h1>
+<h2>User info</h2>
 <div class="profile-container">
-  <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-  <h3 class="profile-name">name <%= user.name %></h3>
-  <h3 class="profile-introduction">introduction <%= user.introduction %></h3>
-   <p><%= link_to edit_user_path(user) do %>
-   <i class="fas fa-user-cog"></i>
+  <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:"100x100" %>
+  <table class="table">
+  <tr></tr>
+  <tr>
+      <th>
+      <div class="profile-name">name
+      </th>
+      <th><%= user.name %></div>
+      </th>
+  </tr>
+  <tr>
+      <th>
+  <divclass="profile-introduction">introduction
+      </th>
+      <th><%= user.introduction %></div>
+      </th>
+  </tr>
+  </table>
+  </div>
+  
+    <p><%= link_to edit_user_path(user) do %>
+   <i class="btn btn-outline-secondary btn-block fas  fa-user-cog"></i>
    <% end %></p>
-    
-</div>
+   
+
 <h4>New book</h4>
 <% if @book.errors.any? %>
   <%= @book.errors.count %>件のerrorが発生しました
@@ -16,9 +33,9 @@
   <% end %>
 <% end %>
 <%= form_with model:book,local:true do |f| %>
-<h4>Title</h4>
+<p>Title</p>
  <%= f.text_field :title %>
-<h4>Opinion</h4>
+<p>Opinion</p>
 <%= f.text_area :body %>
 <br><%= f.submit 'Create Book', class: "btn btn-success" %></br>
 <% end %>
