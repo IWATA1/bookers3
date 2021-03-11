@@ -7,10 +7,18 @@ def show
     @book = Book.find(params[:id])
     @user = @book.user
     @books = Book.new
+    @post_comment = PostComment.new
 end
 
 def edit
-    @book= Book.find(params[:id])
+    if params[:id] == current_user.id
+         @user = User.find(params[:id])
+    render action: :edit
+    else
+    @user = current_user
+    render action: :show
+    end
+  @book= Book.find(params[:id])
 end
 
 def update
@@ -38,6 +46,7 @@ def  index
     @books = Book.all
     @user = current_user
     @book = Book.new
+    
 end
 
 def destroy
@@ -57,6 +66,6 @@ end
       redirect_to books_path
     end
  end
- 
+
 
 end

@@ -2,29 +2,38 @@
 <div class="profile-container">
   <%= attachment_image_tag user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg", size:"100x100" %>
   <table class="table">
-  <tr></tr>
   <tr>
       <th>
       <div class="profile-name">name
       </th>
       <th><%= user.name %></div>
-      </th>
-      
+     </th
+
+
   </tr>
   <tr>
-      <th>
+      <td>
   <divclass="profile-introduction">introduction
-      </th>
-      <th><%= user.introduction %></div>
-      </th>
+      </td>
+      <td><%= user.introduction %></div>
+      </td>
+      <td><p><%=link_to "フォロー", follows_user_path(@user.id) %></p></td>
+      <td><p><%=link_to "フォロワー", followers_user_path(@user.id) %></p></td>
+<% if current_user != @user %>
+    <% if @user.followed_by?(current_user) %>
+        <p><%=link_to "フォロー済み", user_relationships_path(@user.id), method: :delete %></p>
+    <% else %>
+        <p><%=link_to "フォローする", user_relationships_path(@user.id), method: :post %></p>
+    <% end %>
+<% end %>
   </tr>
   </table>
   </div>
-  
+
     <p><%= link_to edit_user_path(user) do %>
    <i class="btn btn-outline-secondary btn-block fas  fa-user-cog"></i>
    <% end %></p>
-   
+
 
 <h4>New book</h4>
 <% if @book.errors.any? %>
